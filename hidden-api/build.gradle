@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    namespace 'github.ryuunoakaihitomi.hidden_api'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 31
+        targetSdk 33
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildFeatures {
+        aidl true
+    }
+}
+
+dependencies {
+    annotationProcessor "dev.rikka.tools.refine:annotation-processor:$harp_version"
+    compileOnly "dev.rikka.tools.refine:annotation:$harp_version"
+}

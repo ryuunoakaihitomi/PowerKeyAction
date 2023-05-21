@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+    id 'dev.rikka.tools.refine' version '4.3.0'
+}
+
+android {
+    namespace 'github.ryuunoakaihitomi.powerkeyaction'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "github.ryuunoakaihitomi.powerkeyaction"
+        minSdk 31
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        aidl true
+    }
+}
+
+dependencies {
+    def shizuku_version = '13.1.1'
+    implementation "dev.rikka.shizuku:api:$shizuku_version"
+    implementation "dev.rikka.shizuku:provider:$shizuku_version"
+
+    implementation "dev.rikka.tools.refine:runtime:$harp_version"
+
+    compileOnly project(':hidden-api')
+}
