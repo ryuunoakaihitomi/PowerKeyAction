@@ -4,5 +4,5 @@ plugins {
 }
 
 ext {
-    harp_version = "3.4.0"
+    harp_version = "4.3.0"
 }
