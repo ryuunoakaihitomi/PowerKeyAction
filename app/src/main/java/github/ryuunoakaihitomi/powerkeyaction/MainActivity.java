@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.DeadObjectException;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.topjohnwu.superuser.Shell;
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import rikka.shizuku.Shizuku;
 
@@ -73,6 +77,13 @@ public class MainActivity extends Activity implements Shizuku.OnRequestPermissio
         var serviceArgs = new Shizuku.UserServiceArgs(new ComponentName(this, MyOp.class))
                 .processNameSuffix("operation")
                 .daemon(false);
+        var executed = new AtomicBoolean(false);
+        new Handler(getMainLooper()).postDelayed(() -> {
+            if (!executed.get()) {
+                showDeniedInfo();
+                finish();
+            }
+        }, TimeUnit.SECONDS.toMillis(1));
         var connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
@@ -84,6 +95,7 @@ public class MainActivity extends Activity implements Shizuku.OnRequestPermissio
                 }
                 Shizuku.unbindUserService(serviceArgs, this, true);
                 finish();
+                executed.set(true);
             }
 
             @Override

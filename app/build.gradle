@@ -11,8 +11,8 @@ android {
         applicationId "github.ryuunoakaihitomi.powerkeyaction"
         minSdk rootProject.ext.minSdk
         targetSdk 33
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         archivesBaseName("${rootProject.name}-v${versionName}")
     }
 
