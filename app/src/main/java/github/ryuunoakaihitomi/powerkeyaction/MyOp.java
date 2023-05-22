@@ -11,11 +11,19 @@ import android.view.InputDevice;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
+import androidx.annotation.Keep;
+
 import dev.rikka.tools.refine.Refine;
 
+@Keep
 public class MyOp extends IMyOp.Stub {
 
     private static final String TAG = "MyOp";
+
+    @Override
+    public void destroy() {
+        System.exit(0);
+    }
 
     @Override
     public void press() throws RemoteException {
